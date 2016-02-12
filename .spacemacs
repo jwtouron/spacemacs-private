@@ -102,6 +102,7 @@ values."
      yaml
      ;; private
      ;; evil-mc
+     adjust-parens
      )
    ;; List of additional packages that will be installed without being
    ;; wrapped in a layer. If you need some configuration for these
@@ -339,4 +340,10 @@ layers configuration. You are free to put any user code."
     "Go to beginning of match."
     (when (and isearch-forward isearch-other-end)
       (goto-char isearch-other-end)))
+  ;; emacs-lisp-mode
+  (add-hook 'emacs-lisp-mode-hook 'adjust-parens-mode)
+  ;; clojure-mode
+  (add-hook 'clojure-mode-hook 'adjust-parens-mode)
+  ;; lisp-mode
+  (add-hook 'lisp-mode-hook 'adjust-parens-mode)
   )
