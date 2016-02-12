@@ -342,8 +342,11 @@ layers configuration. You are free to put any user code."
       (goto-char isearch-other-end)))
   ;; emacs-lisp-mode
   (add-hook 'emacs-lisp-mode-hook 'adjust-parens-mode)
+  (add-hook 'emacs-lisp-mode-hook 'turn-on-smartparens-strict-mode)
   ;; clojure-mode
   (add-hook 'clojure-mode-hook 'adjust-parens-mode)
+  (add-hook 'clojure-mode-hook 'turn-on-smartparens-strict-mode)
   ;; lisp-mode
   (add-hook 'lisp-mode-hook 'adjust-parens-mode)
+  (add-hook 'lisp-mode-hook 'turn-on-smartparens-strict-mode)
   )
