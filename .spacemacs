@@ -27,7 +27,7 @@ values."
      auto-completion
      autohotkey
      better-defaults
-     c-c++
+     (c-c++ :variables c-c++-enable-clang-support t)
      chrome
      clojure
      colors
