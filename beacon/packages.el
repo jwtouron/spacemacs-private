@@ -5,4 +5,5 @@
   (when (eq (configuration-layer/package-usedp 'beacon) 'beacon)
     (use-package beacon
       :defer 1
+      :diminish beacon-mode
       :config (beacon-mode 1))))
