@@ -43,9 +43,6 @@ values."
      emoji
      erc
      erlang
-     ;; evil-cleverparens
-     ;; evil-commentary
-     ;; evil-snipe
      extra-langs
      eyebrowse
      fsharp
@@ -95,14 +92,11 @@ values."
      typescript
      typography
      version-control
-     ;; vim-empty-lines
      vimscript
      vinegar
      windows-scripts
      yaml
      ;; private
-     ;; evil-mc
-     adjust-parens
      beacon
      key-chord
      num3-mode
@@ -190,7 +184,7 @@ values."
    dotspacemacs-emacs-leader-key "M-m"
    ;; Major mode leader key is a shortcut key which is the equivalent of
    ;; pressing `<leader> m`. Set it to `nil` to disable it. (default ",")
-   dotspacemacs-major-mode-leader-key "-"
+   dotspacemacs-major-mode-leader-key ","
    ;; Major mode leader key accessible in `emacs state' and `insert state'.
    ;; (default "C-M-m)
    dotspacemacs-major-mode-emacs-leader-key "C-M-m"
@@ -205,7 +199,7 @@ values."
    ;; works in the GUI. (default nil)
    dotspacemacs-distinguish-gui-tab nil
    ;; If non nil `Y' is remapped to `y$' in Evil states. (default nil)
-   dotspacemacs-remap-Y-to-y$ t
+   dotspacemacs-remap-Y-to-y$ nil
    ;; If non nil, inverse the meaning of `g' in `:substitute' Evil ex-command.
    ;; (default nil)
    dotspacemacs-ex-substitute-global nil
@@ -282,10 +276,14 @@ values."
    ;; If non nil line numbers are turned on in all `prog-mode' and `text-mode'
    ;; derivatives. If set to `relative', also turns on relative line numbers.
    ;; (default nil)
-   dotspacemacs-line-numbers 'relative
+   dotspacemacs-line-numbers nil
    ;; If non-nil smartparens-strict-mode will be enabled in programming modes.
    ;; (default nil)
    dotspacemacs-smartparens-strict-mode nil
+   ;; If non-nil pressing the closing parenthesis `)' key in insert mode passes
+   ;; over any automatically added closing parenthesis, bracket, quote, etc…
+   ;; This can be temporary disabled by pressing `C-q' before `)'. (default nil)
+   dotspacemacs-smart-closing-parenthesis nil
    ;; Select a scope to highlight delimiters. Possible values are `any',
    ;; `current', `all' or `nil'. Default is `all' (highlight any scope and
    ;; emphasis the current one). (default 'all)
@@ -314,7 +312,6 @@ values."
 It is called immediately after `dotspacemacs/init'.  You are free to put almost
 any user code here.  The exception is org related code, which should be placed
 in `dotspacemacs/user-config'."
-  (setq gc-cons-threshold (* 100 1024 1024))
   )
 
 (defun dotspacemacs/user-config ()
@@ -327,7 +324,6 @@ layers configuration. You are free to put any user code."
   (setq-default tab-width 8)
   (global-auto-revert-mode t)
   (add-hook 'focus-out-hook (lambda () (save-some-buffers t)))
-  (add-hook 'after-init-hook (lambda () (setq gc-cons-threshold (* 500 1024))))
   (golden-ratio-mode 1)
   ;; whitespace
   (setq-default show-trailing-whitespace t)
@@ -345,12 +341,12 @@ layers configuration. You are free to put any user code."
     (when (and isearch-forward isearch-other-end)
       (goto-char isearch-other-end)))
   ;; emacs-lisp-mode
-  (add-hook 'emacs-lisp-mode-hook 'adjust-parens-mode)
   (add-hook 'emacs-lisp-mode-hook 'turn-on-smartparens-strict-mode)
   ;; clojure-mode
-  (add-hook 'clojure-mode-hook 'adjust-parens-mode)
   (add-hook 'clojure-mode-hook 'turn-on-smartparens-strict-mode)
   ;; lisp-mode
-  (add-hook 'lisp-mode-hook 'adjust-parens-mode)
   (add-hook 'lisp-mode-hook 'turn-on-smartparens-strict-mode)
   )
+
+;; Do not write anything past this comment. This is where Emacs will
+;; auto-generate custom variable definitions.
