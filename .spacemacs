@@ -40,7 +40,7 @@ values."
      emoji
      evil-cleverparens
      evil-commentary
-     evil-snipe
+     (evil-snipe :variables evil-snipe-enable-alternate-f-and-t-behaviors t)
      erc
      erlang
      extra-langs
@@ -84,7 +84,7 @@ values."
      shell-scripts
      shell
      sml
-     spell-checking
+     ;; spell-checking
      sql
      swift
      syntax-checking
@@ -184,7 +184,7 @@ values."
    dotspacemacs-emacs-leader-key "M-m"
    ;; Major mode leader key is a shortcut key which is the equivalent of
    ;; pressing `<leader> m`. Set it to `nil` to disable it. (default ",")
-   dotspacemacs-major-mode-leader-key "-"
+   dotspacemacs-major-mode-leader-key ","
    ;; Major mode leader key accessible in `emacs state' and `insert state'.
    ;; (default "C-M-m)
    dotspacemacs-major-mode-emacs-leader-key "C-M-m"
@@ -319,12 +319,12 @@ layers configuration. You are free to put any user code."
         scroll-conservatively 1000
         scroll-preserve-screen-position 1)
   (add-hook 'semantic-mode-hook (lambda () (global-semantic-stickyfunc-mode -1)))
-  ;; whitespace
+  ;; *** WHITESPACE ***
   (setq-default show-trailing-whitespace t)
   (setq-default whitespace-style '(tabs tab-mark))
   (global-whitespace-mode 1)
   (diminish 'global-whitespace-mode)
-  ;; LANGUAGES
+  ;; *** LANGUAGES ***
   (add-hook 'prog-mode-hook (lambda () (aggressive-indent-mode 1)))
   ;; c/c++
   (put 'helm-make-build-dir 'safe-local-variable 'stringp)
@@ -335,20 +335,24 @@ layers configuration. You are free to put any user code."
   (push '(other . "my-c-style") c-default-style)
   (add-to-list 'auto-mode-alist '("\\.h\\'" . c++-mode))
   ;; clojure-mode
-  (add-hook 'clojure-mode-hook 'turn-on-smartparens-strict-mode)
-  (add-hook 'clojure-mode-hook 'evil-cleverparens-mode)
+  (add-hook 'clojure-mode-hook
+            (lambda ()
+              (turn-on-smartparens-strict-mode)
+              (evil-cleverparens-mode 1)))
   ;; emacs-lisp-mode
   (add-hook 'emacs-lisp-mode-hook
             (lambda ()
-              (evil-cleverparens-mode 1)
               (turn-on-smartparens-strict-mode)
+              (evil-cleverparens-mode 1)
               (flycheck-mode -1)))
   ;; lisp-mode
-  (add-hook 'lisp-mode-hook 'turn-on-smartparens-strict-mode)
-  (add-hook 'lisp-mode-hook 'evil-cleverparens-mode)
+  (add-hook 'lisp-mode-hook
+            (lambda ()
+              (turn-on-smartparens-strict-mode)
+              (evil-cleverparens-mode 1)))
   ;; makefile-mode
   (add-hook 'makefile-mode-hook (lambda () (aggressive-indent-mode -1)))
-  ;; finalization
+  ;; *** FINALIZATION ***
   (setq gc-cons-threshold (* 500 1000))
   )
 
