@@ -304,6 +304,8 @@ values."
 It is called immediately after `dotspacemacs/init'.  You are free to put almost
 any user code here.  The exception is org related code, which should be placed
 in `dotspacemacs/user-config'."
+  (with-eval-after-load 'evil-cleverparens
+    (delete '("s" . evil-cp-substitute) evil-cp-regular-bindings))
   )
 
 (defun dotspacemacs/user-config ()
